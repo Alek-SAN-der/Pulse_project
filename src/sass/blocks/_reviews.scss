@@ -1,0 +1,32 @@
+.reviews {
+    padding-bottom: 40px;
+    &__review {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 60px;
+    }
+    &__img {
+        max-width: 169px;
+        max-height: 169px;
+        margin-right: 61px;
+    }
+    &__name {
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 18px;
+        color: #0D0D0D;
+        margin-bottom: 1px;
+    }
+    &__marathon {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 22px;
+        color: #646464;
+    }
+    &__descr {
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 25px;
+        color: #0D0D0D;
+    }
+}
