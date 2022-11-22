@@ -33,7 +33,7 @@ $(document).ready(function(){
 
     function toogleSlide(item) {
       $(item).each(function(i) {
-        $(this).on('click', function(e){
+        $(this).on('click', function(e) {
           e.preventDefault();
           $('.catalog-item__content').eq(i).toggleClass('catalog-item__content_active');
           $('.catalog-item__list').eq(i).toggleClass('catalog-item__list_active');
@@ -43,4 +43,26 @@ $(document).ready(function(){
 
     toogleSlide('.catalog-item__link');
     toogleSlide('.catalog-item__back');
+
+    // появление окна консультации
+    $('[data-modal="consultation"]').on('click', function() {
+      $('.overlay, #consultation').fadeIn('slow');
+    });
+    // закрытие всех окон и подложки при нажатии на крестик
+    $('.modal__close').on('click', function() {
+      $('.overlay, #consultation, #order, #thanks').fadeOut('slow');
+    });
+    // //просто появление окна купить
+    // $('.button_mini').on('click', function(){
+    //   $('.overlay, #order').fadeIn('slow');
+    // });
+    
+    // появление окна купить с подстановкой названия товара
+    $('.button_mini').each(function(i) {
+      $(this).on('click', function() {
+        $('#order .modal__descr').text($('.catalog-item__subtitle').eq(i).text());
+        $('.overlay, #order').fadeIn('slow');
+      });
+    });
+
   });
