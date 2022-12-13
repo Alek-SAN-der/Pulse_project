@@ -44,6 +44,14 @@
     &_mini {
         min-height: 143px;
     }
+    
+    input.error {
+        border: 1px solid red;
+    }
+    label.error {
+        text-align: center;
+        margin-bottom: 15px;
+    }
 }
 
 #consultation, #order, #thanks {

@@ -65,4 +65,59 @@ $(document).ready(function(){
       });
     });
 
+    //Валидация форм
+    function valideForms(form){
+      $(form).validate({
+        rules: {
+          name: {
+            required: true,
+            minlength: 2
+          },
+          phone:"required",
+          email: {
+            required: true,
+            email: true
+          }
+        },
+        messages: {
+          name: {
+              required: "Пожалуйста, введите свое имя",
+              minlength: jQuery.validator.format("Введите {0} символа!")
+            },
+          phone: "Пожалуйста, введите свой номер телефона",       
+          email: {
+            required: "Пожалуйста, введите свою почту",
+            email: "Неправильно введен адрес почты"
+          }
+        }
+      });
+    };
+
+    valideForms('#consultation form');
+    valideForms('#consultation-form');
+    valideForms('#order form');
+    
+    // валидация ввода номера телефона через плагин
+    $('input[name=phone]').mask("+372 999 99999"||"+372 9999 9999");
+
+    // отправка форм
+    $('form').submit(function(e) {
+      e.preventDefault(); //не перезагружает страницу после отправки формы
+
+      if(!$(this).valid()) {   //если форма не проходит валидацию, отправка формы останавливается
+        return;
+      }
+
+      $.ajax({     //настройка отправки формы
+        type: "POST",
+        url: "mailer/smart.php",
+        data: $(this).serialize()
+      }).done(function(){    //настройка действий после отправки формы
+        $(this).find("input").val("");   //после отправки формы значения инпутов формы станут пустыми
+        $('#consultation, #order').fadeOut(); //убираем окно заказа
+        $('.overlay, #thanks').fadeIn('slow'); //показываем подложку и окно благодарности
+        $('form').trigger('reset');   //очистка и сброс всех форм
+      });
+      return false;
+    });
   });
